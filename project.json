@@ -5,6 +5,7 @@
   "main": "Main.xaml",
   "dependencies": {
     "UiPath.Excel.Activities": "[2.22.3]",
+    "UiPath.IntegrationService.Activities": "[1.15.0]",
     "UiPath.IntelligentOCR.Activities": "[6.24.0]",
     "UiPath.Mail.Activities": "[1.21.1]",
     "UiPath.PDF.Activities": "[3.22.1]",
