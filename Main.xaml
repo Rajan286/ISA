@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="869.6,10801.6" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1140,3096.8" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd2="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -39,6 +39,11 @@
       <x:String>UiPath.PDF.Activities</x:String>
       <x:String>UiPath.Shared.Activities</x:String>
       <x:String>UiPath.Core.Activities.OCR.Engines</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -113,27 +118,102 @@
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="713.6,1357.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="713.6,3032" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="EladenText" />
       <Variable x:TypeArguments="x:String" Name="EladenDauer" />
+      <Variable x:TypeArguments="x:String" Name="tankstelleName" />
+      <Variable x:TypeArguments="x:String" Name="tankstelleAdresse" />
+      <Variable x:TypeArguments="x:String" Name="tankDatum" />
+      <Variable x:TypeArguments="x:String" Name="tankUhrzeit" />
+      <Variable x:TypeArguments="x:String" Name="kraftstoffArt" />
+      <Variable x:TypeArguments="x:String" Name="literGetankt" />
+      <Variable x:TypeArguments="x:String" Name="preisProLiter" />
+      <Variable x:TypeArguments="x:String" Name="tankBrutto" />
+      <Variable x:TypeArguments="x:String" Name="tankNetto" />
+      <Variable x:TypeArguments="x:String" Name="ladeDatum" />
+      <Variable x:TypeArguments="x:String" Name="ladeUhrzeitStart" />
+      <Variable x:TypeArguments="x:String" Name="ladeUhrzeitEnde" />
+      <Variable x:TypeArguments="x:String" Name="ladeAdresse" />
+      <Variable x:TypeArguments="x:String" Name="kWhGeladen" />
+      <Variable x:TypeArguments="x:String" Name="preisProKWh" />
+      <Variable x:TypeArguments="x:String" Name="ladeNetto" />
+      <Variable x:TypeArguments="x:String" Name="ladeBrutto" />
+      <Variable x:TypeArguments="x:String" Name="ladeDauer" />
+      <Variable x:TypeArguments="x:String" Name="rechnungsTyp" />
+      <Variable x:TypeArguments="x:String" Name="fehlertext" />
+      <Variable x:TypeArguments="x:String" Name="eintragGueltig" />
+      <Variable x:TypeArguments="x:String" Name="tankGrundgebühr" />
+      <Variable x:TypeArguments="x:String" Name="ladeNettoGrundgebühr" />
+      <Variable x:TypeArguments="x:String" Name="ladeBruttoGrundgebühr" />
+      <Variable x:TypeArguments="x:String" Name="Ladekosten" />
+      <Variable x:TypeArguments="x:String" Name="KmAnzeige" />
+      <Variable x:TypeArguments="x:String" Name="tankKostenGesamt" />
+      <Variable x:TypeArguments="x:String" Name="TankKmAnzahlKennzeichen" />
+      <Variable x:TypeArguments="x:String" Name="TankKennzeichen" />
+      <Variable x:TypeArguments="x:String" Name="Waschkarte" />
+      <Variable x:TypeArguments="x:String" Name="WaschkostenGesamt" />
+      <Variable x:TypeArguments="x:String" Name="WaschDatum" />
+      <Variable x:TypeArguments="sd:DataTable" Name="belegTabelle" />
+      <Variable x:TypeArguments="x:String" Name="ocrText" />
+      <Variable x:TypeArguments="s:String[]" Name="spaltenListe">
+        <Variable.Default>
+          <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{&quot;tankstelleName&quot;, &quot;tankstelleAdresse&quot;, &quot;kraftstoffArt&quot;, &quot;tankDatum&quot;, &quot;tankUhrzeit&quot;, &quot;literGetankt&quot;, &quot;preisProLiter&quot;, &quot;tankBrutto&quot;, &quot;tankNetto&quot;, &quot;ladeDatum&quot;, &quot;ladeUhrzeitStart&quot;, &quot;ladeUhrzeitEnde&quot;, &quot;ladeAdresse&quot;, &quot;kWhGeladen&quot;, &quot;preisProKWh&quot;, &quot;ladeNetto&quot;, &quot;ladeBrutto&quot;, &quot;ladeDauer&quot;, &quot;rechnungsTyp&quot;, &quot;tankKostenGesamt&quot;, &quot;TankKmAnzahlKennzeichen&quot;, &quot;TankKennzeichen&quot;, &quot;Waschkarte&quot;, &quot;WaschkostenGesamt&quot;, &quot;EladenText&quot;, &quot;EladenDauer&quot;}" />
+        </Variable.Default>
+      </Variable>
+      <Variable x:TypeArguments="x:String" Name="variable5" />
+      <Variable x:TypeArguments="x:String" Name="variable6" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="651.2,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[EladenText]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">C:\Users\Ramin\Documents\UiPath\FuelAndElectricityAutomation\Eingabe</InArgument>
-      </Assign.Value>
-    </Assign>
-    <ui:ForEachFileX DisplayName="For Each File In Folder" Folder="C:\Users\rajan\Documents\UiPath\FuelAndElectricityAutomation\Eingabe" sap:VirtualizedContainerService.HintSize="651.2,1124" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
+    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="651.2,117.6" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="sd:DataTable">[belegTabelle]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="sd:DataTable">[New DataTable]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:MultipleAssign>
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="651.2,465.6" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[spaltenListe]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="x:String">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:String" Name="spaltenName" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Hauptteil" sap:VirtualizedContainerService.HintSize="377.6,277.6" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="[spaltenName]" DataTable="[belegTabelle]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="334.4,188" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
+    <ui:ForEachFileX DisplayName="For Each File In Folder" Folder="C:\Users\rajan\Documents\UiPath\FuelAndElectricityAutomation\Eingabe" sap:VirtualizedContainerService.HintSize="651.2,2100.8" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
       <ui:ForEachFileX.Body>
         <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
           <ActivityAction.Argument1>
@@ -142,53 +222,15 @@
           <ActivityAction.Argument2>
             <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
           </ActivityAction.Argument2>
-          <Sequence DisplayName="Ausführen" sap:VirtualizedContainerService.HintSize="617.6,860.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Ausführen" sap:VirtualizedContainerService.HintSize="617.6,1837.6" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[Path.GetExtension(CurrentFile.FullName).ToLower = &quot;.pdf&quot;]" sap:VirtualizedContainerService.HintSize="555.2,748.8" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[Path.GetExtension(CurrentFile.FullName).ToLower = &quot;.pdf&quot;]" sap:VirtualizedContainerService.HintSize="555.2,1497.6" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="521.6,565.6" sap2010:WorkflowViewState.IdRef="Sequence_3">
-                  <Sequence.Variables>
-                    <Variable x:TypeArguments="x:String" Name="tankstelleName" />
-                    <Variable x:TypeArguments="x:String" Name="tankstelleAdresse" />
-                    <Variable x:TypeArguments="x:String" Name="tankDatum" />
-                    <Variable x:TypeArguments="x:String" Name="tankUhrzeit" />
-                    <Variable x:TypeArguments="x:String" Name="kraftstoffArt" />
-                    <Variable x:TypeArguments="x:String" Name="literGetankt" />
-                    <Variable x:TypeArguments="x:String" Name="preisProLiter" />
-                    <Variable x:TypeArguments="x:String" Name="tankBrutto" />
-                    <Variable x:TypeArguments="x:String" Name="tankNetto" />
-                    <Variable x:TypeArguments="x:String" Name="ladeDatum" />
-                    <Variable x:TypeArguments="x:String" Name="ladeUhrzeitStart" />
-                    <Variable x:TypeArguments="x:String" Name="ladeUhrzeitEnde" />
-                    <Variable x:TypeArguments="x:String" Name="ladeAdresse" />
-                    <Variable x:TypeArguments="x:String" Name="kWhGeladen" />
-                    <Variable x:TypeArguments="x:String" Name="preisProKWh" />
-                    <Variable x:TypeArguments="x:String" Name="ladeNetto" />
-                    <Variable x:TypeArguments="x:String" Name="ladeBrutto" />
-                    <Variable x:TypeArguments="x:String" Name="ladeDauer" />
-                    <Variable x:TypeArguments="x:String" Name="rechnungsTyp" />
-                    <Variable x:TypeArguments="x:String" Name="fehlertext" />
-                    <Variable x:TypeArguments="x:String" Name="eintragGueltig" />
-                    <Variable x:TypeArguments="x:String" Name="tankGrundgebühr" />
-                    <Variable x:TypeArguments="x:String" Name="ladeNettoGrundgebühr" />
-                    <Variable x:TypeArguments="x:String" Name="ladeBruttoGrundgebühr" />
-                    <Variable x:TypeArguments="x:String" Name="Ladekosten" />
-                    <Variable x:TypeArguments="x:String" Name="KmAnzeige" />
-                    <Variable x:TypeArguments="x:String" Name="tankKostenGesamt" />
-                    <Variable x:TypeArguments="x:String" Name="TankKmAnzahlKennzeichen" />
-                    <Variable x:TypeArguments="x:String" Name="TankKennzeichen" />
-                    <Variable x:TypeArguments="x:String" Name="Waschkarte" />
-                    <Variable x:TypeArguments="x:String" Name="WaschkostenGesamt" />
-                    <Variable x:TypeArguments="x:String" Name="WaschDatum" />
-                    <Variable x:TypeArguments="x:String" Name="variable3" />
-                    <Variable x:TypeArguments="x:String" Name="ocrText" />
-                    <Variable x:TypeArguments="x:String" Name="variable4" />
-                    <Variable x:TypeArguments="x:String" Name="variable5" />
-                  </Sequence.Variables>
+                <Sequence sap:VirtualizedContainerService.HintSize="521.6,1314.4" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -196,20 +238,226 @@
                   </sap:WorkflowViewStateService.ViewState>
                   <ui:ReadPDFWithOCR Text="{x:Null}" DegreeOfParallelism="-1" DisplayName="Read PDF With OCR" FileName="[CurrentFile.FullName]" sap:VirtualizedContainerService.HintSize="478.4,157.6" sap2010:WorkflowViewState.IdRef="ReadPDFWithOCR_1" ImageDpi="150" Range="All">
                     <ui:ReadPDFWithOCR.OCREngine>
-                      <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                      <ActivityFunc x:TypeArguments="sd1:Image, scg:IEnumerable(scg:KeyValuePair(sd2:Rectangle, x:String))">
                         <ActivityFunc.Argument>
-                          <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+                          <DelegateInArgument x:TypeArguments="sd1:Image" Name="Image" />
                         </ActivityFunc.Argument>
                         <ui:GoogleOCR AllowedCharacters="{x:Null}" DeniedCharacters="{x:Null}" FilterRegion="{x:Null}" Invert="{x:Null}" Language="{x:Null}" Output="{x:Null}" PredictionId="{x:Null}" Profile="{x:Null}" Scale="{x:Null}" Text="{x:Null}" ComputeSkewAngle="False" DisplayName="Tesseract OCR" ExtractWords="False" sap:VirtualizedContainerService.HintSize="200,24.8" sap2010:WorkflowViewState.IdRef="GoogleOCR_1" Image="[Image]" NoopExecution="False" />
                       </ActivityFunc>
                     </ui:ReadPDFWithOCR.OCREngine>
                   </ui:ReadPDFWithOCR>
                   <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="478.4,90.4" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[ocrText]" />
-                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478.4,148" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478.4,896.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
                     <ui:MultipleAssign.AssignOperations>
-                      <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
-                        <ui:AssignOperation To="{x:Null}" Value="{x:Null}" sap2010:WorkflowViewState.IdRef="AssignOperation_1" />
-                        <ui:AssignOperation To="{x:Null}" Value="{x:Null}" sap2010:WorkflowViewState.IdRef="AssignOperation_2" />
+                      <scg:List x:TypeArguments="ui:AssignOperation" Capacity="32">
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[tankstelleName]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[If(ocrText.Contains("Aral"), "Aral", If(ocrText.Contains("HEM"), "HEM", If(ocrText.Contains("ENBW"), "ENBW", If(ocrText.Contains("Total"), "Total", If(ocrText.Contains("Jet"), "Jet", "Unbekannt")))))]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[tankstelleAdresse]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[If(ocrText.Contains("Aral"), "Aral Adresse", If(ocrText.Contains("Shell"), "Shell Adresse", If(ocrText.Contains("Esso"), "Esso Adresse", If(ocrText.Contains("Total"), "Total Adresse", If(ocrText.Contains("Jet"), "Jet Adresse", "Unbekannt")))))]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[kraftstoffArt]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[If(ocrText.Contains("Diesel"), "Diesel", If(ocrText.Contains("Super"), "Super", If(ocrText.Contains("E10"), "E10", "Unbekannt")))]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[tankDatum]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "\d{2}\.\d{2}\.\d{4}").Value]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[tankUhrzeit]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "\d{2}:\d{2}").Value]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[literGetankt]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "\d+,\d+ L").Value.Replace(" L", "")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_9">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[preisProLiter]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "\d+,\d+ €/L").Value.Replace(" €/L", "")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_10">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[tankBrutto]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "Brutto: \d+,\d+ €").Value.Replace("Brutto: ", "").Replace(" €", "")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[tankNetto]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "Netto: \d+,\d+ €").Value.Replace("Netto: ", "").Replace(" €", "")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[ladeDatum]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "\d{2}\.\d{2}\.\d{4}").Value]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[ladeUhrzeitStart]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "Start: \d{2}\.\d{2}\.\d{4} \d{2}:\d{2}").Value.Replace("Start: ", "")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[ladeUhrzeitEnde]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "Ende: \d{2}\.\d{2}\.\d{4} \d{2}:\d{2}").Value.Replace("Ende: ", "")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_15">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[ladeAdresse]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[If(ocrText.Contains("Hofheim"), "Am Alten Bach 11, 65719 Hofheim am Taunus", If(ocrText.Contains("Frankfurt"), "Mainzer Landstraße 23, 60329 Frankfurt am Main", If(ocrText.Contains("Wiesbaden"), "Wilhelmstraße 12, 65183 Wiesbaden", "Unbekannt")))]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_16">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[kWhGeladen]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "\d+,\d+ kWh").Value.Replace(" kWh", "")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_17">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[preisProKWh]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "\d+ ct/kWh").Value.Replace(" ct/kWh", "")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_18">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[ladeNetto]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "Netto: \d+,\d+ €").Value.Replace("Netto: ", "").Replace(" €", "")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_19">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[ladeBrutto]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "Brutto: \d+,\d+ €").Value.Replace("Brutto: ", "").Replace(" €", "")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_20">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[ladeDauer]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "Dauer: \d{2}:\d{2}:\d{2}").Value.Replace("Dauer: ", "")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_21">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[rechnungsTyp]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[If(ocrText.Contains("Wasch"), "Waschen", If(ocrText.Contains("Strom"), "Laden", If(ocrText.Contains("Tanken"), "Tanken", "Unbekannt")))]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_22">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[tankKostenGesamt]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "(?&lt;=Gesamtkosten\\s?:\\s?)(\\d+,\\d{2})").Groups(1).Value]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_23">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[TankKmAnzahlKennzeichen]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[If(System.Text.RegularExpressions.Regex.Match(ocrText, "[A-Z]{1,3}-[A-Z]{1,2}\s?\d{1,4}E?").Success, "Kennzeichen: " &amp; System.Text.RegularExpressions.Regex.Match(ocrText, "[A-Z]{1,3}-[A-Z]{1,2}\s?\d{1,4}E?").Value &amp; If(System.Text.RegularExpressions.Regex.Match(ocrText, "\b\d{4,6}\b").Success, " | KM: " &amp; System.Text.RegularExpressions.Regex.Match(ocrText, "\b\d{4,6}\b").Value, " | KM: nicht gefunden"), "Kennzeichen nicht erkannt")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_24">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[TankKennzeichen]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[If(System.Text.RegularExpressions.Regex.Match(ocrText, "[A-Z]{1,3}-[A-Z]{1,2} ?\d{1,4}").Success, System.Text.RegularExpressions.Regex.Match(ocrText, "[A-Z]{1,3}-[A-Z]{1,2} ?\d{1,4}").Value, "Nicht erkannt")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_25">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[Waschkarte]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[If(ocrText.Contains("Waschkarte") Or ocrText.Contains("Karte"), "Ja", "Nein")]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_26">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[WaschkostenGesamt]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "(?&lt;=Waschkosten\\s?:\\s?)(\\d+,\\d{2})").Groups(1).Value]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_27">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[EladenText]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[ocrText]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
+                        <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_28">
+                          <ui:AssignOperation.To>
+                            <OutArgument x:TypeArguments="x:String">[EladenDauer]</OutArgument>
+                          </ui:AssignOperation.To>
+                          <ui:AssignOperation.Value>
+                            <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Match(ocrText, "Dauer:\\s?(\\d{2}:\\d{2}:\\d{2})").Groups(1).Value]</InArgument>
+                          </ui:AssignOperation.Value>
+                        </ui:AssignOperation>
                       </scg:List>
                     </ui:MultipleAssign.AssignOperations>
                   </ui:MultipleAssign>
@@ -219,9 +467,11 @@
                 <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4" />
               </If.Else>
             </If>
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{tankstelleName, tankstelleAdresse, kraftstoffArt, tankDatum, tankUhrzeit, literGetankt, preisProLiter, tankBrutto, tankNetto, ladeDatum, ladeUhrzeitStart, ladeUhrzeitEnde, ladeAdresse, kWhGeladen, preisProKWh, ladeNetto, ladeBrutto, ladeDauer, rechnungsTyp, tankKostenGesamt, TankKmAnzahlKennzeichen, TankKennzeichen, WaschkostenGesamt, Waschkarte, WaschDatum, EladenText, EladenDauer}]" DataTable="[belegTabelle]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="555.2,188" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
           </Sequence>
         </ActivityAction>
       </ui:ForEachFileX.Body>
     </ui:ForEachFileX>
+    <ui:WriteRange StartingCell="{x:Null}" AddHeaders="False" DataTable="[belegTabelle]" DisplayName="Write Range Workbook" sap:VirtualizedContainerService.HintSize="651.2,116" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Belege" WorkbookPath="[Path.Combine(Environment.CurrentDirectory, &quot;Ausgabe&quot;, &quot;Belege.xlsx&quot;)]" />
   </Sequence>
 </Activity>
