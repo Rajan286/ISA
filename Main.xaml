@@ -115,7 +115,7 @@
       <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="569.6,1169.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="713.6,1357.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="EladenText" />
       <Variable x:TypeArguments="x:String" Name="EladenDauer" />
@@ -125,7 +125,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="507.2,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <Assign sap:VirtualizedContainerService.HintSize="651.2,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[EladenText]</OutArgument>
       </Assign.To>
@@ -133,7 +133,7 @@
         <InArgument x:TypeArguments="x:String">C:\Users\Ramin\Documents\UiPath\FuelAndElectricityAutomation\Eingabe</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEachFileX DisplayName="For Each File In Folder" Folder="C:\Users\rajan\Documents\UiPath\FuelAndElectricityAutomation\Eingabe" sap:VirtualizedContainerService.HintSize="507.2,936" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
+    <ui:ForEachFileX DisplayName="For Each File In Folder" Folder="C:\Users\rajan\Documents\UiPath\FuelAndElectricityAutomation\Eingabe" sap:VirtualizedContainerService.HintSize="651.2,1124" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
       <ui:ForEachFileX.Body>
         <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
           <ActivityAction.Argument1>
@@ -142,15 +142,15 @@
           <ActivityAction.Argument2>
             <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
           </ActivityAction.Argument2>
-          <Sequence DisplayName="Ausführen" sap:VirtualizedContainerService.HintSize="473.6,672.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Ausführen" sap:VirtualizedContainerService.HintSize="617.6,860.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[Path.GetExtension(CurrentFile.FullName).ToLower = &quot;.pdf&quot;]" sap:VirtualizedContainerService.HintSize="411.2,560.8" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[Path.GetExtension(CurrentFile.FullName).ToLower = &quot;.pdf&quot;]" sap:VirtualizedContainerService.HintSize="555.2,748.8" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="377.6,377.6" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <Sequence sap:VirtualizedContainerService.HintSize="521.6,565.6" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="x:String" Name="tankstelleName" />
                     <Variable x:TypeArguments="x:String" Name="tankstelleAdresse" />
@@ -186,13 +186,15 @@
                     <Variable x:TypeArguments="x:String" Name="WaschDatum" />
                     <Variable x:TypeArguments="x:String" Name="variable3" />
                     <Variable x:TypeArguments="x:String" Name="ocrText" />
+                    <Variable x:TypeArguments="x:String" Name="variable4" />
+                    <Variable x:TypeArguments="x:String" Name="variable5" />
                   </Sequence.Variables>
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:ReadPDFWithOCR Text="{x:Null}" DegreeOfParallelism="-1" DisplayName="Read PDF With OCR" FileName="[CurrentFile.FullName]" sap:VirtualizedContainerService.HintSize="334.4,157.6" sap2010:WorkflowViewState.IdRef="ReadPDFWithOCR_1" ImageDpi="150" Range="All">
+                  <ui:ReadPDFWithOCR Text="{x:Null}" DegreeOfParallelism="-1" DisplayName="Read PDF With OCR" FileName="[CurrentFile.FullName]" sap:VirtualizedContainerService.HintSize="478.4,157.6" sap2010:WorkflowViewState.IdRef="ReadPDFWithOCR_1" ImageDpi="150" Range="All">
                     <ui:ReadPDFWithOCR.OCREngine>
                       <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
                         <ActivityFunc.Argument>
@@ -202,7 +204,15 @@
                       </ActivityFunc>
                     </ui:ReadPDFWithOCR.OCREngine>
                   </ui:ReadPDFWithOCR>
-                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="334.4,90.4" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[ocrText]" />
+                  <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="478.4,90.4" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[ocrText]" />
+                  <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478.4,148" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+                    <ui:MultipleAssign.AssignOperations>
+                      <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+                        <ui:AssignOperation To="{x:Null}" Value="{x:Null}" sap2010:WorkflowViewState.IdRef="AssignOperation_1" />
+                        <ui:AssignOperation To="{x:Null}" Value="{x:Null}" sap2010:WorkflowViewState.IdRef="AssignOperation_2" />
+                      </scg:List>
+                    </ui:MultipleAssign.AssignOperations>
+                  </ui:MultipleAssign>
                 </Sequence>
               </If.Then>
               <If.Else>
