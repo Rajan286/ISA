@@ -163,11 +163,7 @@
       <Variable x:TypeArguments="x:String" Name="WaschDatum" />
       <Variable x:TypeArguments="sd:DataTable" Name="belegTabelle" />
       <Variable x:TypeArguments="x:String" Name="ocrText" />
-      <Variable x:TypeArguments="s:String[]" Name="spaltenListe">
-        <Variable.Default>
-          <VisualBasicValue x:TypeArguments="s:String[]" ExpressionText="{}{&quot;tankstelleName&quot;, &quot;tankstelleAdresse&quot;, &quot;kraftstoffArt&quot;, &quot;tankDatum&quot;, &quot;tankUhrzeit&quot;, &quot;literGetankt&quot;, &quot;preisProLiter&quot;, &quot;tankBrutto&quot;, &quot;tankNetto&quot;, &quot;ladeDatum&quot;, &quot;ladeUhrzeitStart&quot;, &quot;ladeUhrzeitEnde&quot;, &quot;ladeAdresse&quot;, &quot;kWhGeladen&quot;, &quot;preisProKWh&quot;, &quot;ladeNetto&quot;, &quot;ladeBrutto&quot;, &quot;ladeDauer&quot;, &quot;rechnungsTyp&quot;, &quot;tankKostenGesamt&quot;, &quot;TankKmAnzahlKennzeichen&quot;, &quot;TankKennzeichen&quot;, &quot;Waschkarte&quot;, &quot;WaschkostenGesamt&quot;, &quot;EladenText&quot;, &quot;EladenDauer&quot;}" />
-        </Variable.Default>
-      </Variable>
+      <Variable x:TypeArguments="s:String[]" Default="[{&quot;tankstelleName&quot;, &quot;tankstelleAdresse&quot;, &quot;kraftstoffArt&quot;, &quot;tankDatum&quot;, &quot;tankUhrzeit&quot;, &quot;literGetankt&quot;, &quot;preisProLiter&quot;, &quot;tankBrutto&quot;, &quot;tankNetto&quot;, &quot;ladeDatum&quot;, &quot;ladeUhrzeitStart&quot;, &quot;ladeUhrzeitEnde&quot;, &quot;ladeAdresse&quot;, &quot;kWhGeladen&quot;, &quot;preisProKWh&quot;, &quot;ladeNetto&quot;, &quot;ladeBrutto&quot;, &quot;ladeDauer&quot;, &quot;rechnungsTyp&quot;, &quot;tankKostenGesamt&quot;, &quot;TankKmAnzahlKennzeichen&quot;, &quot;TankKennzeichen&quot;, &quot;Waschkarte&quot;, &quot;WaschkostenGesamt&quot;, &quot;EladenText&quot;, &quot;EladenDauer&quot;}]" Name="spaltenListe" />
       <Variable x:TypeArguments="x:String" Name="variable5" />
       <Variable x:TypeArguments="x:String" Name="variable6" />
     </Sequence.Variables>
@@ -236,7 +232,7 @@
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:ReadPDFWithOCR Text="{x:Null}" DegreeOfParallelism="-1" DisplayName="Read PDF With OCR" FileName="[CurrentFile.FullName]" sap:VirtualizedContainerService.HintSize="478.4,157.6" sap2010:WorkflowViewState.IdRef="ReadPDFWithOCR_1" ImageDpi="150" Range="All">
+                  <ui:ReadPDFWithOCR DegreeOfParallelism="-1" DisplayName="Read PDF With OCR" FileName="[CurrentFile.FullName]" sap:VirtualizedContainerService.HintSize="478.4,157.6" sap2010:WorkflowViewState.IdRef="ReadPDFWithOCR_1" ImageDpi="150" Range="All" Text="[ocrText]">
                     <ui:ReadPDFWithOCR.OCREngine>
                       <ActivityFunc x:TypeArguments="sd1:Image, scg:IEnumerable(scg:KeyValuePair(sd2:Rectangle, x:String))">
                         <ActivityFunc.Argument>
@@ -245,6 +241,12 @@
                         <ui:GoogleOCR AllowedCharacters="{x:Null}" DeniedCharacters="{x:Null}" FilterRegion="{x:Null}" Invert="{x:Null}" Language="{x:Null}" Output="{x:Null}" PredictionId="{x:Null}" Profile="{x:Null}" Scale="{x:Null}" Text="{x:Null}" ComputeSkewAngle="False" DisplayName="Tesseract OCR" ExtractWords="False" sap:VirtualizedContainerService.HintSize="200,24.8" sap2010:WorkflowViewState.IdRef="GoogleOCR_1" Image="[Image]" NoopExecution="False" />
                       </ActivityFunc>
                     </ui:ReadPDFWithOCR.OCREngine>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
                   </ui:ReadPDFWithOCR>
                   <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="478.4,90.4" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[ocrText]" />
                   <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="478.4,896.8" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
@@ -467,7 +469,7 @@
                 <Sequence sap2010:WorkflowViewState.IdRef="Sequence_4" />
               </If.Else>
             </If>
-            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{tankstelleName, tankstelleAdresse, kraftstoffArt, tankDatum, tankUhrzeit, literGetankt, preisProLiter, tankBrutto, tankNetto, ladeDatum, ladeUhrzeitStart, ladeUhrzeitEnde, ladeAdresse, kWhGeladen, preisProKWh, ladeNetto, ladeBrutto, ladeDauer, rechnungsTyp, tankKostenGesamt, TankKmAnzahlKennzeichen, TankKennzeichen, WaschkostenGesamt, Waschkarte, WaschDatum, EladenText, EladenDauer}]" DataTable="[belegTabelle]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="555.2,188" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{tankstelleName, tankstelleAdresse, kraftstoffArt, tankDatum, tankUhrzeit, literGetankt, preisProLiter, tankBrutto, tankNetto, ladeDatum, ladeUhrzeitStart, ladeUhrzeitEnde, ladeAdresse, kWhGeladen, preisProKWh, ladeNetto, ladeBrutto, ladeDauer, rechnungsTyp, tankKostenGesamt, TankKmAnzahlKennzeichen, TankKennzeichen, Waschkarte, WaschkostenGesamt, EladenText, EladenDauer}]" DataTable="[belegTabelle]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="555.2,188" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
           </Sequence>
         </ActivityAction>
       </ui:ForEachFileX.Body>
