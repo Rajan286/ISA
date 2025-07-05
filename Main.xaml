@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1322.4,4041.6" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd2="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uoa="clr-namespace:UiPath.OmniPage.Activities;assembly=UiPath.OmniPage.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1322.4,4046.4" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd2="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:si="clr-namespace:System.IO;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uoa="clr-namespace:UiPath.OmniPage.Activities;assembly=UiPath.OmniPage.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -46,6 +46,7 @@
       <x:String>UiPath.Excel.Activities</x:String>
       <x:String>UiPath.Vision.OmniPage.Core</x:String>
       <x:String>UiPath.OmniPage.Activities</x:String>
+      <x:String>System.Globalization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -133,7 +134,7 @@
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="713.6,3976.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="713.6,3981.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="EladenText" />
       <Variable x:TypeArguments="x:String" Name="EladenDauer" />
@@ -256,7 +257,7 @@
         </ActivityAction>
       </ui:ForEach.Body>
     </ui:ForEach>
-    <ui:ForEachFileX DisplayName="For Each File In Folder" Folder="C:\Users\rajan\Documents\UiPath\FuelAndElectricityAutomation\Eingabe" sap:VirtualizedContainerService.HintSize="651.2,2983.2" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
+    <ui:ForEachFileX DisplayName="For Each File In Folder" Folder="C:\Users\rajan\Documents\UiPath\FuelAndElectricityAutomation\Eingabe" sap:VirtualizedContainerService.HintSize="651.2,2988" sap2010:WorkflowViewState.IdRef="ForEachFileX_1" IncludeSubDirectories="False" OrderBy="NameAscFirst" SkipFolderWithoutPermission="False">
       <ui:ForEachFileX.Body>
         <ActivityAction x:TypeArguments="si:FileInfo, x:Int32">
           <ActivityAction.Argument1>
@@ -265,7 +266,7 @@
           <ActivityAction.Argument2>
             <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentIndex" />
           </ActivityAction.Argument2>
-          <Sequence DisplayName="Ausführen" sap:VirtualizedContainerService.HintSize="617.6,2720.8" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Ausführen" sap:VirtualizedContainerService.HintSize="617.6,2725.6" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:String" Name="preisProKWh" />
             </Sequence.Variables>
@@ -274,9 +275,9 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <If Condition="[Path.GetExtension(CurrentFile.FullName).ToLower = &quot;.pdf&quot;]" sap:VirtualizedContainerService.HintSize="555.2,1817.6" sap2010:WorkflowViewState.IdRef="If_1">
+            <If Condition="[Path.GetExtension(CurrentFile.FullName).ToLower = &quot;.pdf&quot;]" sap:VirtualizedContainerService.HintSize="555.2,1822.4" sap2010:WorkflowViewState.IdRef="If_1">
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="521.6,1634.4" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                <Sequence sap:VirtualizedContainerService.HintSize="521.6,1639.2" sap2010:WorkflowViewState.IdRef="Sequence_3">
                   <Sequence.Variables>
                     <Variable x:TypeArguments="x:String" Name="parseErfolgGKosten" />
                     <Variable x:TypeArguments="x:String" Name="variable2" />
@@ -357,7 +358,7 @@
                       <OutArgument x:TypeArguments="x:String">[literGetanktRaw]</OutArgument>
                     </Assign.To>
                     <Assign.Value>
-                      <InArgument x:TypeArguments="x:String">[Regex.Match(ocrText, "(\d{1,3}[.,]\d{1,3})\s?(l|liter|1iter|l1ter)", RegexOptions.IgnoreCase).Groups(1).Value]</InArgument>
+                      <InArgument x:TypeArguments="x:String">[If(Not waschkarte.ToLower.Contains("ja") AndAlso Not kraftstoffArt.ToLower.Contains("elektro"), If(Regex.IsMatch(ocrText, "(?&lt;=\*Zp\s?\d+\s?)(\d{1,3}[.,]\d{1,3})|(\d{1,3}[.,]\d{1,3})\s?(l|liter)", RegexOptions.IgnoreCase), If(Regex.Match(ocrText, "(?&lt;=\*Zp\s?\d+\s?)(\d{1,3}[.,]\d{1,3})|(\d{1,3}[.,]\d{1,3})\s?(l|liter)", RegexOptions.IgnoreCase).Groups(1).Success, Regex.Match(ocrText, "(?&lt;=\*Zp\s?\d+\s?)(\d{1,3}[.,]\d{1,3})|(\d{1,3}[.,]\d{1,3})\s?(l|liter)", RegexOptions.IgnoreCase).Groups(1).Value, Regex.Match(ocrText, "(?&lt;=\*Zp\s?\d+\s?)(\d{1,3}[.,]\d{1,3})|(\d{1,3}[.,]\d{1,3})\s?(l|liter)", RegexOptions.IgnoreCase).Groups(2).Value), ""), "")]</InArgument>
                     </Assign.Value>
                   </Assign>
                   <Assign sap:VirtualizedContainerService.HintSize="478.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_8">
@@ -368,12 +369,14 @@
                       <InArgument x:TypeArguments="x:String">[If(Not waschkarte.ToLower.Contains("ja") AndAlso Not kraftstoffArt.ToLower.Contains("elektro"), literGetanktRaw, "")]</InArgument>
                     </Assign.Value>
                   </Assign>
-                  <Assign sap:VirtualizedContainerService.HintSize="478.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+                  <Assign sap:VirtualizedContainerService.HintSize="478.4,83.2" sap2010:WorkflowViewState.IdRef="Assign_1">
                     <Assign.To>
                       <OutArgument x:TypeArguments="x:Boolean">[parseErfolgKosten]</OutArgument>
                     </Assign.To>
                     <Assign.Value>
-                      <InArgument x:TypeArguments="x:Boolean">[parseErfolgKosten = If(String.IsNullOrEmpty(tankKostenGesamt), False, Double.TryParse(tankKostenGesamt.Replace("€", "").Replace("EUR", "").Replace(",", ".").Trim(), kostenDouble))]</InArgument>
+                      <InArgument x:TypeArguments="x:Boolean" xml:space="preserve">[parseErfolgKosten = If(Not String.IsNullOrEmpty(tankKostenGesamt),
+                       Double.TryParse(tankKostenGesamt.Replace(",", ".").Replace("€", "").Replace("EUR", "").Trim(), kostenDouble),
+                       False)]</InArgument>
                     </Assign.Value>
                   </Assign>
                   <Assign sap:VirtualizedContainerService.HintSize="478.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_2">
@@ -389,7 +392,7 @@
                       <OutArgument x:TypeArguments="x:Boolean">[parseErfolgKwh]</OutArgument>
                     </Assign.To>
                     <Assign.Value>
-                      <InArgument x:TypeArguments="x:Boolean">[parseErfolgKwh = If(String.IsNullOrEmpty(kWhGeladen), False, Double.TryParse(kWhGeladen.Replace(",", "."), kwhDouble))]</InArgument>
+                      <InArgument x:TypeArguments="x:Boolean">[parseErfolgKwh = Double.TryParse(kWhGeladen.Replace(",", ".").Replace("€", ""), kwhDouble)]</InArgument>
                     </Assign.Value>
                   </Assign>
                   <Assign sap:VirtualizedContainerService.HintSize="478.4,83.2" sap2010:WorkflowViewState.IdRef="Assign_5">
@@ -405,20 +408,29 @@
 )]</InArgument>
                     </Assign.Value>
                   </Assign>
-                  <Assign sap:VirtualizedContainerService.HintSize="478.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_4">
-                    <Assign.To>
-                      <OutArgument x:TypeArguments="x:String">[preisProKWh]</OutArgument>
-                    </Assign.To>
-                    <Assign.Value>
-                      <InArgument x:TypeArguments="x:String">[If(kwhDouble &gt; 0, (kostenDouble / kwhDouble).ToString("0.00"), "")]</InArgument>
-                    </Assign.Value>
-                  </Assign>
-                  <Assign sap:VirtualizedContainerService.HintSize="478.4,81.6" sap2010:WorkflowViewState.IdRef="Assign_6">
+                  <Assign sap:VirtualizedContainerService.HintSize="478.4,83.2" sap2010:WorkflowViewState.IdRef="Assign_6">
                     <Assign.To>
                       <OutArgument x:TypeArguments="x:String">[tankKostenGesamt]</OutArgument>
                     </Assign.To>
                     <Assign.Value>
-                      <InArgument x:TypeArguments="x:String">[If(Regex.Matches(ocrText, "\d{1,3}[.,]\d{1,2}\s?(€|EUR)", RegexOptions.IgnoreCase).Count &gt; 0, Regex.Matches(ocrText, "\d{1,3}[.,]\d{1,2}\s?(€|EUR)", RegexOptions.IgnoreCase)(0).Value.Trim(), "")]</InArgument>
+                      <InArgument x:TypeArguments="x:String" xml:space="preserve">[If(ocrText.ToLower.Contains("waschkarte") OrElse ocrText.ToLower.Contains("autowasche") OrElse ocrText.ToLower.Contains("aufladen"),
+   Regex.Matches(ocrText, "\b\d{1,3}[.,]\d{1,2}").Cast(Of Match)().
+      Select(Function(m) Double.Parse(m.Value.Replace(",", "."), Globalization.CultureInfo.InvariantCulture)).
+      Where(Function(n) n &lt; 20).DefaultIfEmpty(0).First().ToString("0.00") &amp; " EUR",
+   Regex.Matches(ocrText, "\d{1,3}[.,]\d{1,2} ?(€|EUR)").Cast(Of Match)().
+      Select(Function(m) Double.Parse(Regex.Match(m.Value, "\d{1,3}[.,]\d{1,2}").Value.Replace(",", "."), Globalization.CultureInfo.InvariantCulture)).
+      DefaultIfEmpty(0).Max().ToString("0.00") &amp; " EUR")]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <Assign sap:VirtualizedContainerService.HintSize="478.4,83.2" sap2010:WorkflowViewState.IdRef="Assign_4">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[preisProKWh]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String" xml:space="preserve">[If(Not String.IsNullOrEmpty(KWhGeladen) AndAlso Not String.IsNullOrEmpty(tankKostenGesamt),
+   (Double.Parse(tankKostenGesamt.Replace("EUR", "").Replace("€", "").Replace(",", ".").Trim) /
+    Double.Parse(KWhGeladen.Replace(",", ".").Trim)).ToString("0.00"),
+   "")]</InArgument>
                     </Assign.Value>
                   </Assign>
                 </Sequence>
