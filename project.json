@@ -1,18 +1,14 @@
 {
-  "name": "FuelAndElectricityAutomation",
-  "projectId": "0980bd19-b318-4716-9d8f-8d9859b75a61",
-  "description": "",
+  "name": "FuelAndElectricityAutomation - Kopie",
+  "projectId": "9fd579c3-0d00-4437-875d-6bb38ddea7ae",
+  "description": "Leerer Prozess",
   "main": "Main.xaml",
   "dependencies": {
-    "UiPath.Excel.Activities": "[2.22.3]",
-    "UiPath.IntegrationService.Activities": "[1.15.0]",
+    "UiPath.Excel.Activities": "[3.1.1]",
     "UiPath.Mail.Activities": "[1.21.1]",
-    "UiPath.OCR.Activities": "[3.22.0]",
-    "UiPath.OmniPage.Activities": "[1.21.0]",
-    "UiPath.PDF.Activities": "[3.22.1]",
-    "UiPath.System.Activities": "[23.10.5]",
+    "UiPath.System.Activities": "[25.4.4]",
     "UiPath.Testing.Activities": "[23.10.1]",
-    "UiPath.UIAutomation.Activities": "[25.10.7]"
+    "UiPath.UIAutomation.Activities": "[23.10.7]"
   },
   "webServices": [],
   "entitiesStores": [],
@@ -55,7 +51,7 @@
   "entryPoints": [
     {
       "filePath": "Main.xaml",
-      "uniqueId": "f41b0207-16af-4e5b-8ffd-99c7bb584552",
+      "uniqueId": "5a5c6fe8-b854-461f-8b06-c4b61419a144",
       "input": [],
       "output": []
     }
